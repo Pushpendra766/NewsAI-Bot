@@ -13,7 +13,7 @@ if __name__ == "__main__":
     }
 
     response = requests.request("GET", url, headers=headers, params=querystring)
-
+    print(response.json())
     for i in range(5):
         image_url = response.json()[i]['image']  # the image on the web
         save_name = f'files/news_img{i}.jpg'  # local name to be saved

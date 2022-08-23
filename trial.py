@@ -1,9 +1,14 @@
-from PIL import Image
-img = Image.open('car.jpg', 'r')
-img_w, img_h = img.size
-# background = Image.new('RGBA', (720, 1280), (239, 245, 56, 255))
-background = Image.open('frame_image.png')
-bg_w, bg_h = background.size
-offset = ((bg_w - img_w) // 2, (bg_h - img_h) // 2)
-background.paste(img, (-500, 500))
-background.save('out.png')
+import math
+
+from gtts import gTTS
+from mutagen.wave import WAVE
+import audioread
+
+text = "The most iconic donut shop in Hollywood is Randy's Donuts. It has appeared in many movies including Crocodile Dundee and Iron Man 2."
+lang = 'hi'
+obj = gTTS(text=text, lang=lang)
+obj.save("sample.wav")
+with audioread.audio_open('sample.wav') as f:
+    print(math.ceil(f.duration))
+# audio = WAVE("sample.wav")
+# print(audio.info.length)

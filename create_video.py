@@ -1,8 +1,12 @@
+import math
 import cv2
 import subprocess
 import pyttsx3
 from mutagen.wave import WAVE
 from PIL import Image, ImageDraw, ImageFont
+from gtts import gTTS
+import audioread
+
 
 FRAME_FILENAME = 'files/frame_image.png'
 AUDIO_FILENAME = 'files/audio.wav'
@@ -26,14 +30,11 @@ def generate_frame(BG_IMAGE, title, image):
 
 def generate_audio(audio_text):
     audio_text = "..."+audio_text
-    engine = pyttsx3.init()
-    engine.setProperty('rate', 140)
-    voices = engine.getProperty('voices')
-    engine.setProperty('voice', voices[1].id)
-    engine.save_to_file(audio_text, AUDIO_FILENAME)
-    engine.runAndWait()
-    audio = WAVE(AUDIO_FILENAME)
-    return int(audio.info.length)
+    obj = gTTS(text=audio_text, lang='en', slow=False)
+    obj.save(AUDIO_FILENAME)
+    with audioread.audio_open(AUDIO_FILENAME) as f:
+        audio_length = math.ceil(f.duration)
+    return audio_length
 
 def generate_video(audio_length):
     out = cv2.VideoWriter(VIDEO_FILENAME, cv2.VideoWriter_fourcc(*'DIVX'), 1, (720, 1280))
