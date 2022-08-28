@@ -7,15 +7,21 @@ from PIL import Image, ImageDraw, ImageFont
 from gtts import gTTS
 import audioread
 
-
 FRAME_FILENAME = 'files/frame_image.png'
 AUDIO_FILENAME = 'files/audio.wav'
 VIDEO_FILENAME = 'files/video.avi'
 
 def generate_frame(BG_IMAGE, title, image):
     if len(title) > 27:
-        # below line will add \n after every 27 character, so that whole title be visible
-        final_title = "\n".join(title[i:i+27] for i in range(0, len(title), 27))
+        new_title = []
+        last_id = 0
+        for i in range(27, len(title), 27):
+            idx = i
+            while (title[idx] != " "):
+                idx -= 1
+            new_title.append(title[last_id:idx].center(27))
+            last_id = idx + 1
+        final_title = "\n".join(new_title)
     else:
         final_title = title
 
