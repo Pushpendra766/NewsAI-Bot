@@ -1,8 +1,6 @@
 import math
 import cv2
 import subprocess
-import pyttsx3
-from mutagen.wave import WAVE
 from PIL import Image, ImageDraw, ImageFont
 from gtts import gTTS
 import audioread
@@ -28,7 +26,7 @@ def generate_frame(BG_IMAGE, title, image):
     img_w, img_h = image.size
     bg_w, bg_h = BG_IMAGE.size
 
-    font = ImageFont.truetype('arial.ttf', 40)
+    font = ImageFont.truetype('font/arial.ttf', 40)
     d = ImageDraw.Draw(BG_IMAGE)
     d.text((50, 100), final_title, fill=(0, 0, 0), font=font)
     BG_IMAGE.paste(image, ((bg_w-img_w)//2, (bg_h-img_h)//2))
@@ -58,9 +56,7 @@ def create_video(news_title, news_summary, i):
     FRAME_SIZE = (720, 1280)
     BG_IMAGE = Image.new('RGB', FRAME_SIZE, color=(243, 250, 105))
     OUTPUT_FILENAME = f'files/output{i}.mkv'
-    # news_title = "a1a2aawsesr3a4a 5a6a7a8a9a1a2b1b2b3b4b5b6"
     news_image = Image.open(f"files/news_img{i}.jpg")
-    # news_summary = "Manchester United's hopes of unveiling casemiro have been dealt a blow over a problem with the midfielder's visa, according to reports. The transfer was 'subject to the agreement of personal terms, UK visa requirements and a medical' the 30-year-old has encountered some issues with his visa, so the deal will not be rubberstamped for several more days."
     generate_frame(BG_IMAGE, news_title, news_image)
     audio_length = generate_audio(news_summary)
     generate_video(audio_length)
