@@ -10,14 +10,14 @@ AUDIO_FILENAME = 'files/audio.wav'
 VIDEO_FILENAME = 'files/video.avi'
 
 def generate_frame(BG_IMAGE, title, image):
-    if len(title) > 27:
+    if len(title) > 29:
         new_title = []
         last_id = 0
-        for i in range(27, len(title), 27):
+        for i in range(29, len(title), 29):
             idx = i
             while (title[idx] != " "):
                 idx -= 1
-            new_title.append(title[last_id:idx].center(27))
+            new_title.append(title[last_id:idx].center(29))
             last_id = idx + 1
         final_title = "\n".join(new_title)
     else:
@@ -34,7 +34,7 @@ def generate_frame(BG_IMAGE, title, image):
 
 def generate_audio(audio_text):
     audio_text = "..."+audio_text
-    obj = gTTS(text=audio_text, lang='en', slow=False)
+    obj = gTTS(text=audio_text, lang='en')
     obj.save(AUDIO_FILENAME)
     with audioread.audio_open(AUDIO_FILENAME) as f:
         audio_length = math.ceil(f.duration)
