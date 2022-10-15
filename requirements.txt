@@ -4,7 +4,7 @@ Pillow==9.2.0
 pyttsx3==2.90
 pywin32==304
 requests==2.22.0
-rsa==4.0
+rsa==4.7
 six==1.14.0
 soupsieve==1.9.5
 uritemplate==3.0.1
