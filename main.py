@@ -8,7 +8,7 @@ if __name__ == "__main__":
     querystring = {"limit": "10", "skip": "0"}
 
     headers = {
-        "X-RapidAPI-Key": "3d64a8bd0cmshd5f69b82b666ab6p10f313jsnb7ba1d1993a6",
+        "X-RapidAPI-Key": "API_KEY",
         "X-RapidAPI-Host": "newsx.p.rapidapi.com"
     }
 
